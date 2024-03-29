@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sovtrud_project/theme.dart'; // Импортируйте вашу тему
+import 'package:sovtrud_project/theme.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'generated/l10n.dart';
 import 'package:sovtrud_project/app_data.dart';
 import 'package:sovtrud_project/drawer_widget.dart';
+import 'package:sovtrud_project/task_screen.dart';
+
 
 
 
@@ -23,6 +27,18 @@ class MyApp extends StatelessWidget {
     var themeNotifier = Provider.of<ThemeNotifier>(context);
 
     return MaterialApp(
+      localizationsDelegates: [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en', 'US'), // Английский (США)
+        const Locale('ru', 'RU'), // Русский (Россия)
+        // Добавьте другие языки здесь
+      ],
+      locale: const Locale('ru', 'RU'),
       theme: themeNotifier.darkTheme ? darkTheme : lightTheme,
       home: MyHomePage(),
     );
@@ -48,14 +64,7 @@ class MyHomePage extends StatelessWidget {
         ],
       ),
       drawer: DrawerWidget(),
-      body: Center(
-
-        child: Text('Press the menu icon to open the drawer'),
-
-
-      ),
-
-
+      body: TaskScreen(),
     );
   }
 }

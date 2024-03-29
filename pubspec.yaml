@@ -31,6 +31,10 @@ dependencies:
   flutter:
     sdk: flutter
   provider: ^6.1.2
+  intl: ^0.18.1
+  flutter_localizations:
+    sdk: flutter
+
 
 
 
@@ -91,3 +95,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_intl:
+  enabled: true
