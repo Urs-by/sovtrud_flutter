@@ -1,6 +1,7 @@
 import 'package:sovtrud_project/app_data.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:sovtrud_project/gauge_indicator.dart';
 
 
 
@@ -99,7 +100,7 @@ class _TaskScreenState extends State<TaskScreen> {
                       padding: EdgeInsets.only(left: 25.0, right: 5.0),
                       child: Text(
                         selectedTask == tasks[0]
-                            ? MaterialLocalizations.of(context).formatMediumDate(currentDate)
+                            ? MaterialLocalizations.of(context).formatMediumDate(currentDate).toUpperCase()
                             : selectedTask == tasks[1]
                             ? '${MaterialLocalizations.of(context).formatMediumDate(
                             DateTime(
@@ -107,7 +108,7 @@ class _TaskScreenState extends State<TaskScreen> {
                             ' - ${MaterialLocalizations.of(context).formatMediumDate(
                             DateTime(currentDate.year, currentDate.month, currentDate.day - currentDate.weekday + 7))}'
                             : selectedTask == tasks[2]
-                            ? MaterialLocalizations.of(context).formatMonthYear(currentDate)
+                            ? MaterialLocalizations.of(context).formatMonthYear(currentDate).toUpperCase()
                             : selectedTask == tasks[4]
                             ? MaterialLocalizations.of(context).formatYear(currentDate)
                             : '${((currentDate.month - 1) / 3).ceil()} Квартал ${currentDate.year}',
@@ -128,11 +129,12 @@ class _TaskScreenState extends State<TaskScreen> {
                 ),
 
                 SizedBox(height: 10),
+
                 Text(
-                  '$task_plan: $plannedTasks      $task_fact: $completedTasks',
+                  '$task_plan: $plannedTasks                                      $task_fact: $completedTasks',
                   style: TextStyle(fontSize: 16),
                 ),
-
+                GaudeIndicator(value: (completedTasks/plannedTasks*100)),
               ],
             ),
           ),
