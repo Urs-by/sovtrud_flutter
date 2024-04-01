@@ -18,3 +18,13 @@ List<String> tasks = [
 
 final task_plan = "План";
 final task_fact = "Факт";
+
+List<String> day = [
+  'Пн',
+  'Вт',
+  'Ср',
+  'Чт',
+  'Пт',
+  'Сб',
+  'Вс',
+];

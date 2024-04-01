@@ -1,7 +1,10 @@
+import 'package:flutter/widgets.dart';
 import 'package:sovtrud_project/app_data.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:sovtrud_project/gauge_indicator.dart';
+import 'package:charts_painter/chart.dart';
+import 'package:sovtrud_project/charts_painter.dart';
 
 
 
@@ -83,7 +86,7 @@ class _TaskScreenState extends State<TaskScreen> {
         Expanded(
           child: Container(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              // mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(height: 20),
                 Row(
@@ -127,18 +130,82 @@ class _TaskScreenState extends State<TaskScreen> {
                     ),
                   ],
                 ),
-
-                SizedBox(height: 10),
-
-                Text(
-                  '$task_plan: $plannedTasks                                      $task_fact: $completedTasks',
-                  style: TextStyle(fontSize: 16),
-                ),
-                GaudeIndicator(value: (completedTasks/plannedTasks*100)),
               ],
             ),
           ),
         ),
+        Expanded(
+
+            child:
+              Container(
+
+                // child: Container(
+                  alignment: Alignment.topCenter,
+                  child: Column(
+
+                    children: [
+                    selectedTask == tasks[0]
+                   ? Column(
+                      // mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text('$task_plan: $plannedTasks                                      $task_fact: $completedTasks',),
+                        GaugeIndicator(value: (completedTasks/plannedTasks*100)),],
+                    ): selectedTask == tasks[1]
+                   ? Container(
+                    width: 300.0,
+                    child: Chart(
+                      state: ChartState<void>(
+                          data: ChartData.randomBarValues(items:7, maxValue: 7,),
+                          itemOptions: BarItemOptions(
+                            padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                            barItemBuilder: (_) => BarItem(
+                                radius: BorderRadius.all(Radius.circular(4.0)),
+                                color: Theme.of(context).colorScheme.secondary),
+                            maxBarWidth: 5.0,
+                          ),
+                          backgroundDecorations: [
+                            GridDecoration(
+                              endWithChartVertical: true,
+                              endWithChartHorizontal: true,
+                              showHorizontalValues: true,
+                              showVerticalGrid: false,
+                              showVerticalValues: true,
+                              showTopHorizontalValue: true,
+                              horizontalLegendPosition: HorizontalLegendPosition.start,
+                              gridColor: Colors.grey.shade200,
+                              gridWidth: 1,
+                              horizontalValuesPadding:
+                              const EdgeInsets.only(bottom: -8.0, right: 8.0),
+                              verticalValuesPadding: const EdgeInsets.only(top: 24.0),
+                              horizontalAxisValueFromValue: (value) => '${value + 1}',
+                              verticalAxisValueFromIndex: (value) =>
+                              day[value],
+                              textStyle: TextStyle(fontSize: 14.0, color: Colors.black45),
+                            ),
+                          ],
+                        ),
+                    ),
+                    )
+
+                          : Container(),
+                  ],
+                  )
+                ),
+
+          ),
+
+    //       Expanded(
+    //         child: Container(
+    //
+    //           height: 100, // Задаем высоту контейнера
+    //           alignment: Alignment.center, // Выравнивание по центру
+    //           child: Text(
+    //           'Список задач',
+    //           style: TextStyle(fontSize: 18),
+    //           ),
+    //           ),
+    //
+    // ),
       ],
     );
   }

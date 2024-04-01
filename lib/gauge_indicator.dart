@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gauge_indicator/gauge_indicator.dart';
 
-class GaudeIndicator extends StatelessWidget {
+class GaugeIndicator extends StatelessWidget {
   final double value;
-  const GaudeIndicator({Key? key, required this.value}) : super(key: key);
+  const GaugeIndicator({Key? key, required this.value}) : super(key: key);
 
 
   /// Build method of your widget.
