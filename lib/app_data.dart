@@ -1,4 +1,4 @@
-
+import 'dart:math';
 
 final username = "Эммануил Гидеонович";
 
@@ -28,3 +28,13 @@ List<String> day = [
   'Сб',
   'Вс',
 ];
+
+
+
+
+List<int> planTasks = List.generate(30, (index) => Random().nextInt(7) + 1);
+
+List<int> factTasks = generateSecondList(planTasks);
+List<int> generateSecondList(List<int> firstList) {
+  return firstList.map((value) => Random().nextInt(value) + 1).toList();
+}
